@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zdxk.locationservice.dao.DeviceInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zdxk.locationservice.domain.DeviceInfo" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="devImei" property="devImei" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="producer" property="producer" jdbcType="VARCHAR" />
+    <result column="registerTime" property="registerTime" jdbcType="VARCHAR" />
+    <result column="lng" property="lng" jdbcType="VARCHAR" />
+    <result column="lat" property="lat" jdbcType="VARCHAR" />
+    <result column="lastLocationTime" property="lastLocationTime" jdbcType="VARCHAR" />
+    <result column="lastMessageTime" property="lastMessageTime" jdbcType="VARCHAR" />
+    <result column="locName" property="locName" jdbcType="VARCHAR" />
+    <result column="timeInterval" property="timeInterval" jdbcType="VARCHAR" />
+    <result column="transmitUrl" property="transmitUrl" jdbcType="VARCHAR" />
+    <result column="connectionStatus" property="connectionStatus" jdbcType="VARCHAR" />
+    <result column="reserved1" property="reserved1" jdbcType="VARCHAR" />
+    <result column="reserved2" property="reserved2" jdbcType="VARCHAR" />
+    <result column="reserved3" property="reserved3" jdbcType="VARCHAR" />
+    <result column="reserved4" property="reserved4" jdbcType="VARCHAR" />
+    <result column="reserved5" property="reserved5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sid, devImei, status, producer, registerTime, lng, lat, lastLocationTime, lastMessageTime, 
+    locName, timeInterval, transmitUrl, connectionStatus, reserved1, reserved2, reserved3, 
+    reserved4, reserved5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zdxk.locationservice.domain.DeviceInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from device_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from device_info
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from device_info
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zdxk.locationservice.domain.DeviceInfoExample" >
+    delete from device_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zdxk.locationservice.domain.DeviceInfo" >
+    insert into device_info (sid, devImei, status, 
+      producer, registerTime, lng, 
+      lat, lastLocationTime, lastMessageTime, 
+      locName, timeInterval, transmitUrl, 
+      connectionStatus, reserved1, reserved2, 
+      reserved3, reserved4, reserved5
+      )
+    values (#{sid,jdbcType=INTEGER}, #{devImei,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{producer,jdbcType=VARCHAR}, #{registerTime,jdbcType=VARCHAR}, #{lng,jdbcType=VARCHAR}, 
+      #{lat,jdbcType=VARCHAR}, #{lastLocationTime,jdbcType=VARCHAR}, #{lastMessageTime,jdbcType=VARCHAR}, 
+      #{locName,jdbcType=VARCHAR}, #{timeInterval,jdbcType=VARCHAR}, #{transmitUrl,jdbcType=VARCHAR}, 
+      #{connectionStatus,jdbcType=VARCHAR}, #{reserved1,jdbcType=VARCHAR}, #{reserved2,jdbcType=VARCHAR}, 
+      #{reserved3,jdbcType=VARCHAR}, #{reserved4,jdbcType=VARCHAR}, #{reserved5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zdxk.locationservice.domain.DeviceInfo" >
+    insert into device_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="devImei != null" >
+        devImei,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="producer != null" >
+        producer,
+      </if>
+      <if test="registerTime != null" >
+        registerTime,
+      </if>
+      <if test="lng != null" >
+        lng,
+      </if>
+      <if test="lat != null" >
+        lat,
+      </if>
+      <if test="lastLocationTime != null" >
+        lastLocationTime,
+      </if>
+      <if test="lastMessageTime != null" >
+        lastMessageTime,
+      </if>
+      <if test="locName != null" >
+        locName,
+      </if>
+      <if test="timeInterval != null" >
+        timeInterval,
+      </if>
+      <if test="transmitUrl != null" >
+        transmitUrl,
+      </if>
+      <if test="connectionStatus != null" >
+        connectionStatus,
+      </if>
+      <if test="reserved1 != null" >
+        reserved1,
+      </if>
+      <if test="reserved2 != null" >
+        reserved2,
+      </if>
+      <if test="reserved3 != null" >
+        reserved3,
+      </if>
+      <if test="reserved4 != null" >
+        reserved4,
+      </if>
+      <if test="reserved5 != null" >
+        reserved5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="devImei != null" >
+        #{devImei,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="producer != null" >
+        #{producer,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null" >
+        #{registerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null" >
+        #{lng,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLocationTime != null" >
+        #{lastLocationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastMessageTime != null" >
+        #{lastMessageTime,jdbcType=VARCHAR},
+      </if>
+      <if test="locName != null" >
+        #{locName,jdbcType=VARCHAR},
+      </if>
+      <if test="timeInterval != null" >
+        #{timeInterval,jdbcType=VARCHAR},
+      </if>
+      <if test="transmitUrl != null" >
+        #{transmitUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="connectionStatus != null" >
+        #{connectionStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved1 != null" >
+        #{reserved1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved2 != null" >
+        #{reserved2,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved3 != null" >
+        #{reserved3,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved4 != null" >
+        #{reserved4,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved5 != null" >
+        #{reserved5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zdxk.locationservice.domain.DeviceInfoExample" resultType="java.lang.Integer" >
+    select count(*) from device_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update device_info
+    <set >
+      <if test="record.sid != null" >
+        sid = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.devImei != null" >
+        devImei = #{record.devImei,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.producer != null" >
+        producer = #{record.producer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registerTime != null" >
+        registerTime = #{record.registerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lng != null" >
+        lng = #{record.lng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lat != null" >
+        lat = #{record.lat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLocationTime != null" >
+        lastLocationTime = #{record.lastLocationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastMessageTime != null" >
+        lastMessageTime = #{record.lastMessageTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locName != null" >
+        locName = #{record.locName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeInterval != null" >
+        timeInterval = #{record.timeInterval,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transmitUrl != null" >
+        transmitUrl = #{record.transmitUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.connectionStatus != null" >
+        connectionStatus = #{record.connectionStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserved1 != null" >
+        reserved1 = #{record.reserved1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserved2 != null" >
+        reserved2 = #{record.reserved2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserved3 != null" >
+        reserved3 = #{record.reserved3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserved4 != null" >
+        reserved4 = #{record.reserved4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserved5 != null" >
+        reserved5 = #{record.reserved5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update device_info
+    set sid = #{record.sid,jdbcType=INTEGER},
+      devImei = #{record.devImei,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      producer = #{record.producer,jdbcType=VARCHAR},
+      registerTime = #{record.registerTime,jdbcType=VARCHAR},
+      lng = #{record.lng,jdbcType=VARCHAR},
+      lat = #{record.lat,jdbcType=VARCHAR},
+      lastLocationTime = #{record.lastLocationTime,jdbcType=VARCHAR},
+      lastMessageTime = #{record.lastMessageTime,jdbcType=VARCHAR},
+      locName = #{record.locName,jdbcType=VARCHAR},
+      timeInterval = #{record.timeInterval,jdbcType=VARCHAR},
+      transmitUrl = #{record.transmitUrl,jdbcType=VARCHAR},
+      connectionStatus = #{record.connectionStatus,jdbcType=VARCHAR},
+      reserved1 = #{record.reserved1,jdbcType=VARCHAR},
+      reserved2 = #{record.reserved2,jdbcType=VARCHAR},
+      reserved3 = #{record.reserved3,jdbcType=VARCHAR},
+      reserved4 = #{record.reserved4,jdbcType=VARCHAR},
+      reserved5 = #{record.reserved5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zdxk.locationservice.domain.DeviceInfo" >
+    update device_info
+    <set >
+      <if test="devImei != null" >
+        devImei = #{devImei,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="producer != null" >
+        producer = #{producer,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null" >
+        registerTime = #{registerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null" >
+        lng = #{lng,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        lat = #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLocationTime != null" >
+        lastLocationTime = #{lastLocationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastMessageTime != null" >
+        lastMessageTime = #{lastMessageTime,jdbcType=VARCHAR},
+      </if>
+      <if test="locName != null" >
+        locName = #{locName,jdbcType=VARCHAR},
+      </if>
+      <if test="timeInterval != null" >
+        timeInterval = #{timeInterval,jdbcType=VARCHAR},
+      </if>
+      <if test="transmitUrl != null" >
+        transmitUrl = #{transmitUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="connectionStatus != null" >
+        connectionStatus = #{connectionStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved1 != null" >
+        reserved1 = #{reserved1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved2 != null" >
+        reserved2 = #{reserved2,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved3 != null" >
+        reserved3 = #{reserved3,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved4 != null" >
+        reserved4 = #{reserved4,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved5 != null" >
+        reserved5 = #{reserved5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zdxk.locationservice.domain.DeviceInfo" >
+    update device_info
+    set devImei = #{devImei,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      producer = #{producer,jdbcType=VARCHAR},
+      registerTime = #{registerTime,jdbcType=VARCHAR},
+      lng = #{lng,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=VARCHAR},
+      lastLocationTime = #{lastLocationTime,jdbcType=VARCHAR},
+      lastMessageTime = #{lastMessageTime,jdbcType=VARCHAR},
+      locName = #{locName,jdbcType=VARCHAR},
+      timeInterval = #{timeInterval,jdbcType=VARCHAR},
+      transmitUrl = #{transmitUrl,jdbcType=VARCHAR},
+      connectionStatus = #{connectionStatus,jdbcType=VARCHAR},
+      reserved1 = #{reserved1,jdbcType=VARCHAR},
+      reserved2 = #{reserved2,jdbcType=VARCHAR},
+      reserved3 = #{reserved3,jdbcType=VARCHAR},
+      reserved4 = #{reserved4,jdbcType=VARCHAR},
+      reserved5 = #{reserved5,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

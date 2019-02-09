@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zdxk.locationservice.dao.LocationDataMapper" >
+  <resultMap id="BaseResultMap" type="com.zdxk.locationservice.domain.LocationData" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="devImei" property="devImei" jdbcType="VARCHAR" />
+    <result column="lng" property="lng" jdbcType="VARCHAR" />
+    <result column="lat" property="lat" jdbcType="VARCHAR" />
+    <result column="locName" property="locName" jdbcType="VARCHAR" />
+    <result column="chainState" property="chainState" jdbcType="VARCHAR" />
+    <result column="batValue" property="batValue" jdbcType="VARCHAR" />
+    <result column="repTime" property="repTime" jdbcType="VARCHAR" />
+    <result column="spType" property="spType" jdbcType="VARCHAR" />
+    <result column="locType" property="locType" jdbcType="VARCHAR" />
+    <result column="mcc1" property="mcc1" jdbcType="VARCHAR" />
+    <result column="mnc1" property="mnc1" jdbcType="VARCHAR" />
+    <result column="lac1" property="lac1" jdbcType="VARCHAR" />
+    <result column="ci1" property="ci1" jdbcType="VARCHAR" />
+    <result column="mcc2" property="mcc2" jdbcType="VARCHAR" />
+    <result column="mnc2" property="mnc2" jdbcType="VARCHAR" />
+    <result column="lac2" property="lac2" jdbcType="VARCHAR" />
+    <result column="ci2" property="ci2" jdbcType="VARCHAR" />
+    <result column="mcc3" property="mcc3" jdbcType="VARCHAR" />
+    <result column="mnc3" property="mnc3" jdbcType="VARCHAR" />
+    <result column="lac3" property="lac3" jdbcType="VARCHAR" />
+    <result column="ci3" property="ci3" jdbcType="VARCHAR" />
+    <result column="uploader" property="uploader" jdbcType="VARCHAR" />
+    <result column="producer" property="producer" jdbcType="VARCHAR" />
+    <result column="reserved1" property="reserved1" jdbcType="VARCHAR" />
+    <result column="reserved2" property="reserved2" jdbcType="VARCHAR" />
+    <result column="reserved3" property="reserved3" jdbcType="VARCHAR" />
+    <result column="reserved4" property="reserved4" jdbcType="VARCHAR" />
+    <result column="reserved5" property="reserved5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, devImei, lng, lat, locName, chainState, batValue, repTime, spType, locType, mcc1, 
+    mnc1, lac1, ci1, mcc2, mnc2, lac2, ci2, mcc3, mnc3, lac3, ci3, uploader, producer, 
+    reserved1, reserved2, reserved3, reserved4, reserved5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zdxk.locationservice.domain.LocationDataExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from location_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from location_data
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from location_data
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zdxk.locationservice.domain.LocationDataExample" >
+    delete from location_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zdxk.locationservice.domain.LocationData" >
+    insert into location_data (id, devImei, lng, 
+      lat, locName, chainState, 
+      batValue, repTime, spType, 
+      locType, mcc1, mnc1, 
+      lac1, ci1, mcc2, mnc2, 
+      lac2, ci2, mcc3, mnc3, 
+      lac3, ci3, uploader, 
+      producer, reserved1, reserved2, 
+      reserved3, reserved4, reserved5
+      )
+    values (#{id,jdbcType=INTEGER}, #{devImei,jdbcType=VARCHAR}, #{lng,jdbcType=VARCHAR}, 
+      #{lat,jdbcType=VARCHAR}, #{locName,jdbcType=VARCHAR}, #{chainState,jdbcType=VARCHAR}, 
+      #{batValue,jdbcType=VARCHAR}, #{repTime,jdbcType=VARCHAR}, #{spType,jdbcType=VARCHAR}, 
+      #{locType,jdbcType=VARCHAR}, #{mcc1,jdbcType=VARCHAR}, #{mnc1,jdbcType=VARCHAR}, 
+      #{lac1,jdbcType=VARCHAR}, #{ci1,jdbcType=VARCHAR}, #{mcc2,jdbcType=VARCHAR}, #{mnc2,jdbcType=VARCHAR}, 
+      #{lac2,jdbcType=VARCHAR}, #{ci2,jdbcType=VARCHAR}, #{mcc3,jdbcType=VARCHAR}, #{mnc3,jdbcType=VARCHAR}, 
+      #{lac3,jdbcType=VARCHAR}, #{ci3,jdbcType=VARCHAR}, #{uploader,jdbcType=VARCHAR}, 
+      #{producer,jdbcType=VARCHAR}, #{reserved1,jdbcType=VARCHAR}, #{reserved2,jdbcType=VARCHAR}, 
+      #{reserved3,jdbcType=VARCHAR}, #{reserved4,jdbcType=VARCHAR}, #{reserved5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zdxk.locationservice.domain.LocationData" >
+    insert into location_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="devImei != null" >
+        devImei,
+      </if>
+      <if test="lng != null" >
+        lng,
+      </if>
+      <if test="lat != null" >
+        lat,
+      </if>
+      <if test="locName != null" >
+        locName,
+      </if>
+      <if test="chainState != null" >
+        chainState,
+      </if>
+      <if test="batValue != null" >
+        batValue,
+      </if>
+      <if test="repTime != null" >
+        repTime,
+      </if>
+      <if test="spType != null" >
+        spType,
+      </if>
+      <if test="locType != null" >
+        locType,
+      </if>
+      <if test="mcc1 != null" >
+        mcc1,
+      </if>
+      <if test="mnc1 != null" >
+        mnc1,
+      </if>
+      <if test="lac1 != null" >
+        lac1,
+      </if>
+      <if test="ci1 != null" >
+        ci1,
+      </if>
+      <if test="mcc2 != null" >
+        mcc2,
+      </if>
+      <if test="mnc2 != null" >
+        mnc2,
+      </if>
+      <if test="lac2 != null" >
+        lac2,
+      </if>
+      <if test="ci2 != null" >
+        ci2,
+      </if>
+      <if test="mcc3 != null" >
+        mcc3,
+      </if>
+      <if test="mnc3 != null" >
+        mnc3,
+      </if>
+      <if test="lac3 != null" >
+        lac3,
+      </if>
+      <if test="ci3 != null" >
+        ci3,
+      </if>
+      <if test="uploader != null" >
+        uploader,
+      </if>
+      <if test="producer != null" >
+        producer,
+      </if>
+      <if test="reserved1 != null" >
+        reserved1,
+      </if>
+      <if test="reserved2 != null" >
+        reserved2,
+      </if>
+      <if test="reserved3 != null" >
+        reserved3,
+      </if>
+      <if test="reserved4 != null" >
+        reserved4,
+      </if>
+      <if test="reserved5 != null" >
+        reserved5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="devImei != null" >
+        #{devImei,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null" >
+        #{lng,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="locName != null" >
+        #{locName,jdbcType=VARCHAR},
+      </if>
+      <if test="chainState != null" >
+        #{chainState,jdbcType=VARCHAR},
+      </if>
+      <if test="batValue != null" >
+        #{batValue,jdbcType=VARCHAR},
+      </if>
+      <if test="repTime != null" >
+        #{repTime,jdbcType=VARCHAR},
+      </if>
+      <if test="spType != null" >
+        #{spType,jdbcType=VARCHAR},
+      </if>
+      <if test="locType != null" >
+        #{locType,jdbcType=VARCHAR},
+      </if>
+      <if test="mcc1 != null" >
+        #{mcc1,jdbcType=VARCHAR},
+      </if>
+      <if test="mnc1 != null" >
+        #{mnc1,jdbcType=VARCHAR},
+      </if>
+      <if test="lac1 != null" >
+        #{lac1,jdbcType=VARCHAR},
+      </if>
+      <if test="ci1 != null" >
+        #{ci1,jdbcType=VARCHAR},
+      </if>
+      <if test="mcc2 != null" >
+        #{mcc2,jdbcType=VARCHAR},
+      </if>
+      <if test="mnc2 != null" >
+        #{mnc2,jdbcType=VARCHAR},
+      </if>
+      <if test="lac2 != null" >
+        #{lac2,jdbcType=VARCHAR},
+      </if>
+      <if test="ci2 != null" >
+        #{ci2,jdbcType=VARCHAR},
+      </if>
+      <if test="mcc3 != null" >
+        #{mcc3,jdbcType=VARCHAR},
+      </if>
+      <if test="mnc3 != null" >
+        #{mnc3,jdbcType=VARCHAR},
+      </if>
+      <if test="lac3 != null" >
+        #{lac3,jdbcType=VARCHAR},
+      </if>
+      <if test="ci3 != null" >
+        #{ci3,jdbcType=VARCHAR},
+      </if>
+      <if test="uploader != null" >
+        #{uploader,jdbcType=VARCHAR},
+      </if>
+      <if test="producer != null" >
+        #{producer,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved1 != null" >
+        #{reserved1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved2 != null" >
+        #{reserved2,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved3 != null" >
+        #{reserved3,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved4 != null" >
+        #{reserved4,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved5 != null" >
+        #{reserved5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zdxk.locationservice.domain.LocationDataExample" resultType="java.lang.Integer" >
+    select count(*) from location_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update location_data
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.devImei != null" >
+        devImei = #{record.devImei,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lng != null" >
+        lng = #{record.lng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lat != null" >
+        lat = #{record.lat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locName != null" >
+        locName = #{record.locName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chainState != null" >
+        chainState = #{record.chainState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batValue != null" >
+        batValue = #{record.batValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repTime != null" >
+        repTime = #{record.repTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spType != null" >
+        spType = #{record.spType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locType != null" >
+        locType = #{record.locType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mcc1 != null" >
+        mcc1 = #{record.mcc1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mnc1 != null" >
+        mnc1 = #{record.mnc1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lac1 != null" >
+        lac1 = #{record.lac1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ci1 != null" >
+        ci1 = #{record.ci1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mcc2 != null" >
+        mcc2 = #{record.mcc2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mnc2 != null" >
+        mnc2 = #{record.mnc2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lac2 != null" >
+        lac2 = #{record.lac2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ci2 != null" >
+        ci2 = #{record.ci2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mcc3 != null" >
+        mcc3 = #{record.mcc3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mnc3 != null" >
+        mnc3 = #{record.mnc3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lac3 != null" >
+        lac3 = #{record.lac3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ci3 != null" >
+        ci3 = #{record.ci3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uploader != null" >
+        uploader = #{record.uploader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.producer != null" >
+        producer = #{record.producer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserved1 != null" >
+        reserved1 = #{record.reserved1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserved2 != null" >
+        reserved2 = #{record.reserved2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserved3 != null" >
+        reserved3 = #{record.reserved3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserved4 != null" >
+        reserved4 = #{record.reserved4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserved5 != null" >
+        reserved5 = #{record.reserved5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update location_data
+    set id = #{record.id,jdbcType=INTEGER},
+      devImei = #{record.devImei,jdbcType=VARCHAR},
+      lng = #{record.lng,jdbcType=VARCHAR},
+      lat = #{record.lat,jdbcType=VARCHAR},
+      locName = #{record.locName,jdbcType=VARCHAR},
+      chainState = #{record.chainState,jdbcType=VARCHAR},
+      batValue = #{record.batValue,jdbcType=VARCHAR},
+      repTime = #{record.repTime,jdbcType=VARCHAR},
+      spType = #{record.spType,jdbcType=VARCHAR},
+      locType = #{record.locType,jdbcType=VARCHAR},
+      mcc1 = #{record.mcc1,jdbcType=VARCHAR},
+      mnc1 = #{record.mnc1,jdbcType=VARCHAR},
+      lac1 = #{record.lac1,jdbcType=VARCHAR},
+      ci1 = #{record.ci1,jdbcType=VARCHAR},
+      mcc2 = #{record.mcc2,jdbcType=VARCHAR},
+      mnc2 = #{record.mnc2,jdbcType=VARCHAR},
+      lac2 = #{record.lac2,jdbcType=VARCHAR},
+      ci2 = #{record.ci2,jdbcType=VARCHAR},
+      mcc3 = #{record.mcc3,jdbcType=VARCHAR},
+      mnc3 = #{record.mnc3,jdbcType=VARCHAR},
+      lac3 = #{record.lac3,jdbcType=VARCHAR},
+      ci3 = #{record.ci3,jdbcType=VARCHAR},
+      uploader = #{record.uploader,jdbcType=VARCHAR},
+      producer = #{record.producer,jdbcType=VARCHAR},
+      reserved1 = #{record.reserved1,jdbcType=VARCHAR},
+      reserved2 = #{record.reserved2,jdbcType=VARCHAR},
+      reserved3 = #{record.reserved3,jdbcType=VARCHAR},
+      reserved4 = #{record.reserved4,jdbcType=VARCHAR},
+      reserved5 = #{record.reserved5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zdxk.locationservice.domain.LocationData" >
+    update location_data
+    <set >
+      <if test="devImei != null" >
+        devImei = #{devImei,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null" >
+        lng = #{lng,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        lat = #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="locName != null" >
+        locName = #{locName,jdbcType=VARCHAR},
+      </if>
+      <if test="chainState != null" >
+        chainState = #{chainState,jdbcType=VARCHAR},
+      </if>
+      <if test="batValue != null" >
+        batValue = #{batValue,jdbcType=VARCHAR},
+      </if>
+      <if test="repTime != null" >
+        repTime = #{repTime,jdbcType=VARCHAR},
+      </if>
+      <if test="spType != null" >
+        spType = #{spType,jdbcType=VARCHAR},
+      </if>
+      <if test="locType != null" >
+        locType = #{locType,jdbcType=VARCHAR},
+      </if>
+      <if test="mcc1 != null" >
+        mcc1 = #{mcc1,jdbcType=VARCHAR},
+      </if>
+      <if test="mnc1 != null" >
+        mnc1 = #{mnc1,jdbcType=VARCHAR},
+      </if>
+      <if test="lac1 != null" >
+        lac1 = #{lac1,jdbcType=VARCHAR},
+      </if>
+      <if test="ci1 != null" >
+        ci1 = #{ci1,jdbcType=VARCHAR},
+      </if>
+      <if test="mcc2 != null" >
+        mcc2 = #{mcc2,jdbcType=VARCHAR},
+      </if>
+      <if test="mnc2 != null" >
+        mnc2 = #{mnc2,jdbcType=VARCHAR},
+      </if>
+      <if test="lac2 != null" >
+        lac2 = #{lac2,jdbcType=VARCHAR},
+      </if>
+      <if test="ci2 != null" >
+        ci2 = #{ci2,jdbcType=VARCHAR},
+      </if>
+      <if test="mcc3 != null" >
+        mcc3 = #{mcc3,jdbcType=VARCHAR},
+      </if>
+      <if test="mnc3 != null" >
+        mnc3 = #{mnc3,jdbcType=VARCHAR},
+      </if>
+      <if test="lac3 != null" >
+        lac3 = #{lac3,jdbcType=VARCHAR},
+      </if>
+      <if test="ci3 != null" >
+        ci3 = #{ci3,jdbcType=VARCHAR},
+      </if>
+      <if test="uploader != null" >
+        uploader = #{uploader,jdbcType=VARCHAR},
+      </if>
+      <if test="producer != null" >
+        producer = #{producer,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved1 != null" >
+        reserved1 = #{reserved1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved2 != null" >
+        reserved2 = #{reserved2,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved3 != null" >
+        reserved3 = #{reserved3,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved4 != null" >
+        reserved4 = #{reserved4,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved5 != null" >
+        reserved5 = #{reserved5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zdxk.locationservice.domain.LocationData" >
+    update location_data
+    set devImei = #{devImei,jdbcType=VARCHAR},
+      lng = #{lng,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=VARCHAR},
+      locName = #{locName,jdbcType=VARCHAR},
+      chainState = #{chainState,jdbcType=VARCHAR},
+      batValue = #{batValue,jdbcType=VARCHAR},
+      repTime = #{repTime,jdbcType=VARCHAR},
+      spType = #{spType,jdbcType=VARCHAR},
+      locType = #{locType,jdbcType=VARCHAR},
+      mcc1 = #{mcc1,jdbcType=VARCHAR},
+      mnc1 = #{mnc1,jdbcType=VARCHAR},
+      lac1 = #{lac1,jdbcType=VARCHAR},
+      ci1 = #{ci1,jdbcType=VARCHAR},
+      mcc2 = #{mcc2,jdbcType=VARCHAR},
+      mnc2 = #{mnc2,jdbcType=VARCHAR},
+      lac2 = #{lac2,jdbcType=VARCHAR},
+      ci2 = #{ci2,jdbcType=VARCHAR},
+      mcc3 = #{mcc3,jdbcType=VARCHAR},
+      mnc3 = #{mnc3,jdbcType=VARCHAR},
+      lac3 = #{lac3,jdbcType=VARCHAR},
+      ci3 = #{ci3,jdbcType=VARCHAR},
+      uploader = #{uploader,jdbcType=VARCHAR},
+      producer = #{producer,jdbcType=VARCHAR},
+      reserved1 = #{reserved1,jdbcType=VARCHAR},
+      reserved2 = #{reserved2,jdbcType=VARCHAR},
+      reserved3 = #{reserved3,jdbcType=VARCHAR},
+      reserved4 = #{reserved4,jdbcType=VARCHAR},
+      reserved5 = #{reserved5,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
