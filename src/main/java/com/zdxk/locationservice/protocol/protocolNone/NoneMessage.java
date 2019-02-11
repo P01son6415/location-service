@@ -1,6 +1,6 @@
-package com.zdxk.locationservice.protocal.protocalNone;
+package com.zdxk.locationservice.protocol.protocolNone;
 
-import com.zdxk.locationservice.protocal.BaseStringMassage;
+import com.zdxk.locationservice.protocol.BaseStringMassage;
 
 public class NoneMessage extends BaseStringMassage {
 

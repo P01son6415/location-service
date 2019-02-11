@@ -1,7 +1,7 @@
-package com.zdxk.locationservice.protocal.protocalAlpha;
+package com.zdxk.locationservice.protocol.protocolAlpha;
 
-import com.zdxk.locationservice.protocal.BaseCodec;
-import com.zdxk.locationservice.protocal.BaseStringMassage;
+import com.zdxk.locationservice.protocol.BaseCodec;
+import com.zdxk.locationservice.protocol.BaseStringMassage;
 
 public class AlphaCodec implements BaseCodec {
 

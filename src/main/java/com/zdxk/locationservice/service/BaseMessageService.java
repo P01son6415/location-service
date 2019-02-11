@@ -1,6 +1,6 @@
 package com.zdxk.locationservice.service;
 
-import com.zdxk.locationservice.protocal.BaseStringMassage;
+import com.zdxk.locationservice.protocol.BaseStringMassage;
 
 public interface BaseMessageService {
 

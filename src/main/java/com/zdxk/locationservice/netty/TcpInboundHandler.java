@@ -1,14 +1,12 @@
 package com.zdxk.locationservice.netty;
 
 
-import com.zdxk.locationservice.protocal.BaseStringMassage;
-import com.zdxk.locationservice.protocal.MessageFactory;
+import com.zdxk.locationservice.protocol.BaseStringMassage;
+import com.zdxk.locationservice.protocol.MessageFactory;
 import com.zdxk.locationservice.service.BaseMessageService;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.socket.SocketChannel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -46,9 +44,12 @@ public class TcpInboundHandler extends ChannelInboundHandlerAdapter{
         // msg中存储的是ByteBuf类型的数据，把数据读取到byte[]中
         byteBuf.readBytes(inboundByteTelegram);
         String hexStrTelegram = DatatypeConverter.printHexBinary(inboundByteTelegram);
+
+        //获取协议对应的MessageService
         BaseMessageService messageService = MessageFactory.createMessageService(hexStrTelegram);
 
         BaseStringMassage message = messageService.telegramToMessage(inboundByteTelegram);
+
         System.out.println(message);
 
         byte[] responseByte = messageService.processData(message);

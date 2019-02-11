@@ -1,9 +1,9 @@
-package com.zdxk.locationservice.protocal.protocalAlpha;
+package com.zdxk.locationservice.protocol.protocolAlpha;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zdxk.locationservice.domain.DeviceInfo;
 import com.zdxk.locationservice.domain.LocationData;
-import com.zdxk.locationservice.protocal.BaseStringMassage;
+import com.zdxk.locationservice.protocol.BaseStringMassage;
 import com.zdxk.locationservice.service.DeviceInfoService;
 import com.zdxk.locationservice.service.LocationDataService;
 import com.zdxk.locationservice.service.BaseMessageService;
@@ -198,7 +198,6 @@ public class AlphaMessageService implements BaseMessageService {
 
         //检查位置是否有效更新
         if(flag){
-            System.out.println("flag");
             System.out.println(locationData);
             alphaMessageService.locationDataService.addDeviceLocation(locationData);
 

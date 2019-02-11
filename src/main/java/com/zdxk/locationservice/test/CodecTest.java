@@ -1,11 +1,9 @@
 package com.zdxk.locationservice.test;
 
 
-import com.zdxk.locationservice.protocal.protocalAlpha.AlphaCodec;
-import com.zdxk.locationservice.protocal.protocalAlpha.AlphaMessage;
-import com.zdxk.locationservice.protocal.protocalAlpha.AlphaMessageService;
-
-import java.util.Arrays;
+import com.zdxk.locationservice.protocol.protocolAlpha.AlphaCodec;
+import com.zdxk.locationservice.protocol.protocolAlpha.AlphaMessage;
+import com.zdxk.locationservice.protocol.protocolAlpha.AlphaMessageService;
 
 public class CodecTest {
 

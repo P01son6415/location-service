@@ -1,4 +1,4 @@
-package com.zdxk.locationservice.protocal;
+package com.zdxk.locationservice.protocol;
 
 import java.util.Arrays;
 

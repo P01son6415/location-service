@@ -1,8 +1,10 @@
-package com.zdxk.locationservice.protocal.protocalNone;
+package com.zdxk.locationservice.protocol.protocolNone;
 
-import com.zdxk.locationservice.protocal.BaseStringMassage;
+import com.zdxk.locationservice.protocol.BaseStringMassage;
 import com.zdxk.locationservice.service.BaseMessageService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class NoneMessageService implements BaseMessageService {
 
     @Override

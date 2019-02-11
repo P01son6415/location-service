@@ -1,7 +1,7 @@
-package com.zdxk.locationservice.protocal;
+package com.zdxk.locationservice.protocol;
 
-import com.zdxk.locationservice.protocal.protocalNone.NoneMessageService;
-import com.zdxk.locationservice.protocal.protocalAlpha.AlphaMessageService;
+import com.zdxk.locationservice.protocol.protocolNone.NoneMessageService;
+import com.zdxk.locationservice.protocol.protocolAlpha.AlphaMessageService;
 import com.zdxk.locationservice.service.BaseMessageService;
 
 /**
@@ -13,9 +13,9 @@ public class MessageFactory {
 
     static public BaseMessageService createMessageService(String hexStrTelegram){
         BaseMessageService messageService = new NoneMessageService();
-        int protocal = identifyProtocal(hexStrTelegram);
+        int protocol = identifyProtocol(hexStrTelegram);
 
-        switch (protocal){
+        switch (protocol){
             case 0:
                 break;
             case 3:
@@ -31,20 +31,30 @@ public class MessageFactory {
      * @param hexStrTelegram
      * @return
      */
-    static public int identifyProtocal(String hexStrTelegram){
-        int protocal = 0;
+    static public int identifyProtocol(String hexStrTelegram){
+        int protocol = 0;
+
+        //
+        //对于头尾标识相同的协议应该抛弃头部
         if (hexStrTelegram.charAt(0)=='F'&&hexStrTelegram.charAt(1)=='A'&&
                 hexStrTelegram.charAt(hexStrTelegram.length()-2)=='A'&&
+                hexStrTelegram.charAt(hexStrTelegram.length()-1)=='F') {
+            protocol = 0;
+        }else if(hexStrTelegram.charAt(hexStrTelegram.length()-2)=='A'&&
                 hexStrTelegram.charAt(hexStrTelegram.length()-1)=='F')
-            protocal = 1;
+            protocol = 1;
+
+
         if(hexStrTelegram.charAt(0)=='2'&&hexStrTelegram.charAt(1)=='4'&&
                 hexStrTelegram.charAt(hexStrTelegram.length()-2)=='2'&&
                 hexStrTelegram.charAt(hexStrTelegram.length()-1)=='1')
-            protocal = 2;
+            protocol = 2;
+
+        //Alpha协议
         if(hexStrTelegram.charAt(0)=='2'&&hexStrTelegram.charAt(1)=='4'&&
                 hexStrTelegram.charAt(hexStrTelegram.length()-2)=='0'&&
                 hexStrTelegram.charAt(hexStrTelegram.length()-1)=='A')
-            protocal = 3;
-        return protocal;
+            protocol = 3;
+        return protocol;
     }
 }
